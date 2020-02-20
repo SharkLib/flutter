@@ -13,6 +13,7 @@ import 'package:pdf_viewer_plugin/pdf_viewer_plugin.dart';
 
 import 'package:path/path.dart';
 import 'popup.dart';
+import 'package:cloudying/AccountWidget.dart';
 
 
 class MainWidget extends StatefulWidget {
@@ -38,7 +39,12 @@ class MainWidget extends StatefulWidget {
 class MainWidgetState extends State<MainWidget> {
 
   final List<int> colorCodes = <int>[10, 20, 30];
-  final List<String> entries = <String>[];//'A', 'B', 'C','d','e','F','G','H','I','P','U','Y'
+  //final List<String> entries = <String>[];//'A', 'B', 'C','d','e','F','G','H','I','P','U','Y'
+  final entries = List<String>.generate(
+  20,
+  (i) =>
+  'Todo $i',
+  );
 
   Color bgColor = Colors.grey  ;
   // PDF preview stuff
@@ -218,6 +224,28 @@ class MainWidgetState extends State<MainWidget> {
     );
   }
 
+  _navigateAndDisplaySelection(BuildContext context) async {
+    // Navigator.push returns a Future that completes after calling
+    // Navigator.pop on the Selection Screen.
+    final result = await Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => SelectionScreen()),
+    );
+
+    // After the Selection Screen returns a result, hide any previous snackbars
+    // and show the new result.
+    Scaffold.of(context)
+      ..removeCurrentSnackBar()
+      ..showSnackBar(SnackBar(content: Text("$result")));
+    setState(()
+    {
+      entries.add('file'+ "$result" +'.pdf');
+
+      bgColor = entries.length==0? Colors.grey:Colors.blue;
+    });
+  }
+
+
   @override
   Widget build(BuildContext context) {
 
@@ -241,6 +269,7 @@ class MainWidgetState extends State<MainWidget> {
       //onPressed: _incrementCounter,
       onPressed:()
       {
+        _navigateAndDisplaySelection(context);
       },
       heroTag: "btn2",
       child: Icon(Icons.send),
