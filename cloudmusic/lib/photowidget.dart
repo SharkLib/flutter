@@ -2,6 +2,10 @@ import 'package:flutter/material.dart';
 //import 'package:photo/photo.dart';
 //import 'package:photo_manager/photo_manager.dart';
 import 'package:camera/camera.dart';
+import 'package:flutter/services.dart';
+//import 'package:simple_permissions/simple_permissions.dart';
+
+
 class PhotoWidget extends StatelessWidget {
   final Color color  ;
 
@@ -19,8 +23,10 @@ class PhotoWidget extends StatelessWidget {
     }
 
     Future<void> prepareCamera() async {
+
+      //requestPermission();
       cameras = await availableCameras();
-  
+
     }
 
 
