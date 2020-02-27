@@ -28,6 +28,9 @@ dependencies:
   gallery_saver: ^1.0.7
   webview_flutter: ^0.3.4
   flutter_webview_plugin: ^0.3.10+1
+  dio: ^3.0.9
+  json_annotation: ^3.0.1
+  #flutter_github_api: ^0.2.1+2
 
 
   # The following adds the Cupertino Icons font to your application.
@@ -37,6 +40,8 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  #github: ^0.2.0
+
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

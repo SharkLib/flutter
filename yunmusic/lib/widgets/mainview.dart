@@ -29,11 +29,13 @@ class MainView extends StatefulWidget {
   _MainViewState createState() => _MainViewState();
 }
 
-class _MainViewState extends State<MainView> {
+class _MainViewState extends State<MainView> with AutomaticKeepAliveClientMixin{
   int _counter = 0;
   int _currentIndex =0;
   bool visibilityTag = false;
   int _wIndex= 0;
+
+  var curPage;
 
   final txt11 = TextEditingController();
   final List<int> colorCodes = <int>[10, 20, 30];
@@ -42,11 +44,14 @@ class _MainViewState extends State<MainView> {
   final List<Widget> _children = [
 
     MusicPage(),
-    LogWidget(Colors.white),
+    LogWidget(),
     AboutWidget(Colors.white ),
 
 
   ];
+
+  @override
+  bool get wantKeepAlive => true;
 
 
   static final CREATE_POST_URL = 'https://dfws52.datafax.com:4433/dfws/v5/authorize';
@@ -60,6 +65,7 @@ class _MainViewState extends State<MainView> {
     setState(() {
       _currentIndex = index;
       _wIndex = index;
+      curPage = _children[index];
     });
   }
 
@@ -88,6 +94,7 @@ class _MainViewState extends State<MainView> {
 
     return Scaffold(
       appBar: AppBar(
+
         // Here we take the value from the MyHomePage object that was created by
         // the App.build method, and use it to set our appbar title.
         title: Text(widget.title),
@@ -116,6 +123,11 @@ class _MainViewState extends State<MainView> {
 
 
       body: _children[_wIndex],
+     /* body: IndexedStack(
+        index: _currentIndex,
+        children: _children,
+      ),*/
+
 
       bottomNavigationBar: BottomNavigationBar(
         onTap: onTabTapped,

@@ -66,17 +66,6 @@ class MainWidgetState extends State<MusicPage> {
   // Show popup with PDF file preview
 
 
-  void _incrementCounter()
-  {
-    setState(()
-    {
-      entries.add('file'+ entries.length.toString()+'.pdf');
-      print("aaaa");
-      bgColor = entries.length==0? Colors.grey:Colors.blue;
-    });
-  }
-
-
 
   // Depending on orientation, creates a list with three widgets:
   // file name, file path, and progress indicator for landscape,
@@ -228,27 +217,7 @@ class MainWidgetState extends State<MusicPage> {
                     child:headerList,
                   ),
 
-                  new  Padding(
 
-                    padding: const EdgeInsets.all(1.0),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: <Widget>[
-                        FloatingActionButton(
-                          heroTag: "btn3",
-                          onPressed: ()
-                          {
-                            print("aa--bb");
-                            _incrementCounter();
-
-                          },
-
-                          child: Icon(Icons.add),
-                        ),
-                        send
-                      ],
-                    ),
-                  ),
 
                 ],
               )

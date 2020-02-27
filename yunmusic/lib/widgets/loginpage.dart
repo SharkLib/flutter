@@ -7,6 +7,9 @@ import 'dart:io';
 
 import 'dart:async';
 import 'package:path_provider/path_provider.dart';
+//import 'package:flutter_github_api/flutter_github_api.dart';
+//import 'package:flutter_github_api/entity/index.dart';
+//User user;
 
 class LoginPage extends StatefulWidget {
   LoginPage({Key key, this.title}) : super(key: key);
@@ -32,6 +35,8 @@ class _LoginPageState extends State<LoginPage> {
   }
 
 
+
+
   @override
   Widget build(BuildContext context) {
 
@@ -46,6 +51,7 @@ class _LoginPageState extends State<LoginPage> {
         key: Key('Login'),
         color: Colors.blue,
         onPressed: () {
+          //login("huang.rong.bj@gmail.com","Good2017!");
           Navigator.pushNamed(context, '/send1');
         },
       ),
