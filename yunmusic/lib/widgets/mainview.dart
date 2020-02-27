@@ -42,13 +42,14 @@ class _MainViewState extends State<MainView> with AutomaticKeepAliveClientMixin{
   final List<String> entries = <String>['A', 'B', 'C','d','e'];
 
   final List<Widget> _children = [
-
     MusicPage(),
     LogWidget(),
     AboutWidget(Colors.white ),
-
-
   ];
+
+  PageStorageKey<Widget> pageKeys ;
+
+
 
   @override
   bool get wantKeepAlive => true;
@@ -59,6 +60,7 @@ class _MainViewState extends State<MainView> with AutomaticKeepAliveClientMixin{
   @override
   void initState() {
     super.initState();
+    pageKeys = PageStorageKey<Widget>(_children[0]);
 
   }
   void onTabTapped(int index) {
@@ -66,6 +68,9 @@ class _MainViewState extends State<MainView> with AutomaticKeepAliveClientMixin{
       _currentIndex = index;
       _wIndex = index;
       curPage = _children[index];
+      pageController.animateToPage(index, duration: Duration(milliseconds: 500), curve: Curves.ease);
+
+
     });
   }
 
@@ -83,6 +88,33 @@ class _MainViewState extends State<MainView> with AutomaticKeepAliveClientMixin{
     });
   }
 
+  void pageChanged(int index) {
+    setState(() {
+      _currentIndex = index;
+    });
+  }
+
+
+  PageController pageController = PageController(
+    initialPage: 0,
+    keepPage: true,
+  );
+
+  Widget buildPageView() {
+    return PageView(
+      controller: pageController,
+      onPageChanged: (index)
+      {
+        pageChanged(index);
+      },
+      children: <Widget>[
+        MusicPage(),
+        LogWidget(),
+        AboutWidget(Colors.white ),
+      ],
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     // This method is rerun every time setState is called, for instance as done
@@ -92,7 +124,8 @@ class _MainViewState extends State<MainView> with AutomaticKeepAliveClientMixin{
     // fast, so that you can just rebuild anything that needs updating rather
     // than having to individually change instances of widgets.
 
-    return Scaffold(
+    return
+     Scaffold(
       appBar: AppBar(
 
         // Here we take the value from the MyHomePage object that was created by
@@ -122,7 +155,7 @@ class _MainViewState extends State<MainView> with AutomaticKeepAliveClientMixin{
       ),
 
 
-      body: _children[_wIndex],
+      body: buildPageView(),
      /* body: IndexedStack(
         index: _currentIndex,
         children: _children,
@@ -148,6 +181,7 @@ class _MainViewState extends State<MainView> with AutomaticKeepAliveClientMixin{
           )
         ],
       ),
+
     );
 
   }

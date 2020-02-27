@@ -38,7 +38,7 @@ class MainWidgetState extends State<MusicPage> {
 
   final List<int> colorCodes = <int>[10, 20, 30];
   //final List<String> entries = <String>[];//'A', 'B', 'C','d','e','F','G','H','I','P','U','Y'
-  final entries = List<String>.generate(
+  var entries = List<String>.generate(
   20,
   (i) =>
   'Todo $i',
@@ -65,6 +65,69 @@ class MainWidgetState extends State<MusicPage> {
   }
   // Show popup with PDF file preview
 
+  Text titleText(int index)
+  {
+    return new Text(
+      entries[index],
+      style: new TextStyle(  fontSize: 14.0,   color: Colors.black87,  fontWeight: FontWeight.bold),  );
+  }
+
+  Text titlsubTText(int index)
+  {
+    return new Text(
+      entries[index],
+      style: new TextStyle(  fontSize: 14.0,   color: Colors.black54,  fontWeight: FontWeight.normal),  );
+  }
+
+  Row controlRow(int index)
+  {
+      return new Row(
+        mainAxisAlignment:
+        MainAxisAlignment.start,
+        crossAxisAlignment:
+        CrossAxisAlignment.center,
+        children: <Widget>
+        [
+      new LinearPercentIndicator(
+      // width: 140.0,
+      lineHeight: 14.0,
+        percent: (index <=20) ? 0.05*index : 1,
+        center: Text(
+          (0.05*index*100).toInt().toString()+ "%",
+          style: new TextStyle(fontSize: 12.0),
+        ),
+        //trailing: Icon(Icons.mood),
+        linearStrokeCap: LinearStrokeCap.roundAll,
+        backgroundColor: Colors.grey,
+        progressColor: Colors.blue,
+      ),
+          //nameAndProgressWgt[1],
+          //nameAndProgressWgt[2],
+          new IconButton(
+            icon: const Icon(Icons.open_in_new),
+            onPressed: () {
+              // We need to prepare the test PDF, and then we can display the PDF.
+
+            },
+            //color: const Color(0x55273A48),
+          ),
+          new IconButton(
+            icon: const Icon(Icons.cancel),
+            onPressed: ()
+            {
+              setState((){
+                entries.removeAt(index);
+                bgColor = entries.length==0? Colors.grey:Colors.blue;
+              });
+
+            },
+            //color: const Color(0x55273A48),
+          )
+        ],
+
+      );
+  }
+
 
 
   // Depending on orientation, creates a list with three widgets:
@@ -82,7 +145,7 @@ class MainWidgetState extends State<MusicPage> {
           fontWeight: FontWeight.bold),
     );
     var filePathWgt = new Text(
-      '/opt/devel/pdf',
+      '/opt/devel/popt/devel/popt/devel/popt/devel/popt/devel/popt/devel/popt/devel/popt/devel/pdf',
       style: new TextStyle(
           fontSize: 14.0,
           color: Colors.black54,
@@ -109,7 +172,8 @@ class MainWidgetState extends State<MusicPage> {
       SizedBox.shrink()
     ];
     if (orientation == Orientation.portrait) {
-      nameAndProgressWgt = <Widget>[ new Expanded(
+      nameAndProgressWgt = <Widget>
+      [ new Expanded(
         child: new Column(
           mainAxisAlignment:
           MainAxisAlignment.start,
@@ -117,20 +181,23 @@ class MainWidgetState extends State<MusicPage> {
           CrossAxisAlignment.start,
           children: <Widget>[fileNameWgt, filePathWgt, progressWgt],
         ),
-      ), SizedBox.shrink(), SizedBox.shrink()];
+      ),
+        SizedBox.shrink(),
+        SizedBox.shrink()
+      ];
     } else {
-      nameAndProgressWgt = <Widget>[
-        new SizedBox(
-          //width: 200.0,
-          child: fileNameWgt,
+      nameAndProgressWgt = <Widget>
+      [ new Expanded(
+          child: new Column(
+            mainAxisAlignment:
+            MainAxisAlignment.start,
+            crossAxisAlignment:
+            CrossAxisAlignment.start,
+            children: <Widget>[fileNameWgt, filePathWgt, progressWgt],
+          ),
         ),
-        new SizedBox(
-          //width: 200.0,
-          child: filePathWgt,
-        ),
-        Expanded(
-          child:progressWgt,
-        )
+        SizedBox.shrink(),
+        SizedBox.shrink()
       ];
     }
 
@@ -142,8 +209,8 @@ class MainWidgetState extends State<MusicPage> {
       children: <Widget>
       [
         nameAndProgressWgt[0],
-        nameAndProgressWgt[1],
-        nameAndProgressWgt[2],
+        //nameAndProgressWgt[1],
+        //nameAndProgressWgt[2],
         new IconButton(
           icon: const Icon(Icons.open_in_new),
           onPressed: () {
