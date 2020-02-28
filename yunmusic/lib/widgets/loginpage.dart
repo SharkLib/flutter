@@ -97,12 +97,12 @@ class _LoginPageState extends State<LoginPage> {
         },
       ),
       IconButton(
-        icon: const Icon(Icons.work),
-        tooltip: 'Show Snackbar',
-        key: Key('Add'),
+        icon: const Icon(Icons.music_video),
+        tooltip: 'Show music player',
+        key: Key('MusicPlayer'),
         color: Colors.blue,
         onPressed: () {
-          _counter.increment();
+          Navigator.pushNamed(context, '/musicview');
         },
       ),
     ],
@@ -189,9 +189,13 @@ class _LoginPageState extends State<LoginPage> {
         child: Column(
           children: <Widget>[
             buildForm(),
+            Text("Logins"),
             button,
+            Text("Group view"),
             shareBtn,
+            Text("Single Views"),
             TestBar,
+            Text("Provider"),
             Text(
               'Value: ${_counter.value}',
               key: Key('Value'),

@@ -3,12 +3,13 @@ import 'package:provider/provider.dart';
 
 import 'widgets/loginpage.dart';
 import 'package:camera/camera.dart';
-import 'widgets/musicpage.dart';
+
 import 'widgets/selectiopage.dart';
 import 'widgets/TakePictureScreen.dart';
 import 'model/countmodel.dart';
 import 'widgets/mainview.dart';
-
+import 'musicmodel/player.dart';
+import 'musicmodel/musicview.dart';
 
 final counter = CounterModel();
 
@@ -49,6 +50,8 @@ class MyApp extends StatelessWidget {
       '/send1': (BuildContext context) => new MainView(title: "Main"),
       '/Camera': (BuildContext context) => new TakePictureScreen(camera: camera,),
       '/Select': (BuildContext context) => new SelectionScreen(),
+      '/musicview': (BuildContext context) => new MusicView(),
+
 
       //'/SDCard': (BuildContext context) => new SendPage(title: "DFsend"),
     };

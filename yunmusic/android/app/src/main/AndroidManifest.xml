@@ -43,8 +43,12 @@
         <meta-data
             android:name="flutterEmbedding"
             android:value="2" />
+        <service android:enabled="true" android:name="live.exit.musicplayer.MusicPlayerService" />
+
     </application>
 
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+
 </manifest>

@@ -4,7 +4,7 @@ import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
 import 'package:flutter/services.dart';
-import 'musicpage.dart';
+import 'mainpage1.dart';
 import 'about.dart';
 import 'package:yunmusic/widgets/LogWidget.dart';
 import 'package:yunmusic/widgets/AccountWidget.dart';
@@ -42,7 +42,7 @@ class _MainViewState extends State<MainView> with AutomaticKeepAliveClientMixin{
   final List<String> entries = <String>['A', 'B', 'C','d','e'];
 
   final List<Widget> _children = [
-    MusicPage(),
+    MainPage1(),
     LogWidget(),
     AboutWidget(Colors.white ),
   ];
@@ -108,7 +108,7 @@ class _MainViewState extends State<MainView> with AutomaticKeepAliveClientMixin{
         pageChanged(index);
       },
       children: <Widget>[
-        MusicPage(),
+        MainPage1(),
         LogWidget(),
         AboutWidget(Colors.white ),
       ],
@@ -123,7 +123,7 @@ class _MainViewState extends State<MainView> with AutomaticKeepAliveClientMixin{
     // The Flutter framework has been optimized to make rerunning build methods
     // fast, so that you can just rebuild anything that needs updating rather
     // than having to individually change instances of widgets.
-
+//willpopscope to skip back key
     return
      Scaffold(
       appBar: AppBar(

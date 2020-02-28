@@ -39,7 +39,7 @@ class _LogWidgetState extends State<LogWidget> with AutomaticKeepAliveClientMixi
 
 
     try {
-      Response<String>  response = await Dio().get("https://api.github.com/users/SharkLib/repos");
+      Response<String>  response = await Dio().get("https://api.github.com/users/flutter/repos");
       //Response<String> response = await DioUtils.getInstance().get(JSON_API);
       List responseJson = json.decode(response.data);
       setState(() {
@@ -107,7 +107,7 @@ class _LogWidgetState extends State<LogWidget> with AutomaticKeepAliveClientMixi
             return new ListTile(
               leading: FlutterLogo(size: 56.0),
               title: new Text(lt[index]['name']),
-              subtitle: new Text(lt[index]['html_url'] +"ddddddfdfdsfghsthdfghdfghdfhdfthdfthrththrthrth"),
+              subtitle: new Text(lt[index]['html_url'] ),
               trailing: new IconButton(
                   icon: new Icon(
                     Icons.navigate_next,
@@ -176,22 +176,14 @@ class _LogWidgetState extends State<LogWidget> with AutomaticKeepAliveClientMixi
 
 
     return Container(
-      margin: EdgeInsets.symmetric(vertical: 20.0),
+      margin: EdgeInsets.symmetric(vertical: 2.0),
       child: new Stack(
         children: <Widget>[
           new Padding(
               padding: new EdgeInsets.only(top: 10.0),
-              child: Column(
-                children: <Widget>[
-                  Text('Send files to server dfdiscover'),
-
-                  new Expanded(
-                    child:gitListView,
-                  ),
-
-
-                ],
-              )
+              child:   Expanded(
+                child:gitListView,
+              ),
 
           ),
 
