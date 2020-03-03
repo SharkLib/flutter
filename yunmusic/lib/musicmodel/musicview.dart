@@ -100,10 +100,10 @@ class _MusicViewState extends State<MusicView> {
   Widget localAsset() {
     return SingleChildScrollView(
       child: _Tab(children: [
-        Text('Play Local Asset \'audio.mp3\':'),
-        _Btn(txt: 'Play', onPressed: () => audioCache.play('audio.mp3')),
-        Text('Loop Local Asset \'audio.mp3\':'),
-        _Btn(txt: 'Loop', onPressed: () => audioCache.loop('audio.mp3')),
+        Text('Play Local Asset \'1.wav\':'),
+        _Btn(txt: 'Play', onPressed: () => audioCache.play('audios/1.wav')),
+        Text('Loop Local Asset \'2.wav\':'),
+        _Btn(txt: 'Loop', onPressed: () => audioCache.loop('audios/2.wav')),
         Text('Play Local Asset \'audio2.mp3\':'),
         _Btn(txt: 'Play', onPressed: () => audioCache.play('audio2.mp3')),
         Text('Play Local Asset In Low Latency \'audio.mp3\':'),

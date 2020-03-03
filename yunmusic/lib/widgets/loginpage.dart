@@ -52,7 +52,7 @@ class _LoginPageState extends State<LoginPage> {
         color: Colors.blue,
         onPressed: () {
           //login("huang.rong.bj@gmail.com","Good2017!");
-          Navigator.pushNamed(context, '/send1');
+          Navigator.pushNamed(context, '/main1');
         },
       ),
       FlatButton(
@@ -81,11 +81,11 @@ class _LoginPageState extends State<LoginPage> {
         },
       ),
       IconButton(
-        icon: const Icon(Icons.compare_arrows),
-        tooltip: 'Show Select',
+        icon: const Icon(Icons.shop),
+        tooltip: 'shop',
         color: Colors.blue,
         onPressed: () {
-          Navigator.pushNamed(context, '/Select');
+          Navigator.pushNamed(context, '/shop');
         },
       ),
       IconButton(
@@ -111,12 +111,10 @@ class _LoginPageState extends State<LoginPage> {
 
     );
 
-
-
     var TestBar = new ButtonBar( children: <Widget>[
       IconButton(
         icon: const Icon(Icons.cloud),
-        tooltip: 'Show Camera',
+        tooltip: 'Camera',
         color: Colors.blue,
         onPressed: () {
           Navigator.pushNamed(context, '/DIO');
@@ -124,22 +122,22 @@ class _LoginPageState extends State<LoginPage> {
       ),
       IconButton(
         icon: const Icon(Icons.security),
-        tooltip: 'Show Select',
+        tooltip: 'Select',
         color: Colors.blue,
         onPressed: () {
           Navigator.pushNamed(context, '/Select');
         },
       ),
       IconButton(
-        icon: const Icon(Icons.ac_unit),
+        icon: const Icon(Icons.play_arrow),
         tooltip: 'Show File ',
         color: Colors.blue,
         onPressed: () async{
-          File file = await FilePicker.getFile();
+          Navigator.pushNamed(context, '/player');
         },
       ),
       IconButton(
-        icon: const Icon(Icons.all_inclusive),
+        icon: const Icon(Icons.filter_1),
         tooltip: 'Show Snackbar',
         key: Key('Add'),
         color: Colors.blue,
@@ -167,11 +165,6 @@ class _LoginPageState extends State<LoginPage> {
           final aa = File('/storage/emulated/0/DCIM/counter.txt');
           aa.writeAsStringSync("abcd");
 
-          // var path = await ExtStorage.getExternalStorageDirectory();
-          // print("using sdcard:" + path);  // /storage/emulated/0
-
-
-
         },
       ),
     ],
@@ -189,13 +182,13 @@ class _LoginPageState extends State<LoginPage> {
         child: Column(
           children: <Widget>[
             buildForm(),
-            Text("Logins"),
+            //Text("Logins"),
             button,
             Text("Group view"),
             shareBtn,
             Text("Single Views"),
             TestBar,
-            Text("Provider"),
+            //Text("Provider"),
             Text(
               'Value: ${_counter.value}',
               key: Key('Value'),
@@ -205,27 +198,16 @@ class _LoginPageState extends State<LoginPage> {
           ],
         ),
       ),
-      /*floatingActionButton: new FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: new Icon(Icons.add),
-      ),
-      */
+
     );
   }
 
   void _onButtonPressed() {
-
-
     //在这里不能通过此方式获取FormState，context不对
     //print(Form.of(context));
     // 通过_formKey.currentState 获取FormState后，
     // 调用validate()方法校验用户名密码是否合法，校验
     // 通过后再提交数据。
-
-
-
-
 
     Navigator.pushNamed(context, '/send1');
   }

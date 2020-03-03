@@ -65,9 +65,9 @@ class _PlayerWidgetState extends State<PlayerWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return new Scaffold(
-      appBar: new AppBar(
-        title: new Text("Playing"),
+    return  Scaffold(
+      appBar:  AppBar(
+        title:  Text("Playing"),
       ),
       body:    Center(
 
@@ -222,6 +222,7 @@ class _PlayerWidgetState extends State<PlayerWidget> {
 
   Future<int> _pause() async {
     final result = await _audioPlayer.pause();
+
     if (result == 1) setState(() => _playerState = PlayerState.paused);
     return result;
   }

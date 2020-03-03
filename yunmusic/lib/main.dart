@@ -10,7 +10,7 @@ import 'model/countmodel.dart';
 import 'widgets/mainview.dart';
 import 'musicmodel/player.dart';
 import 'musicmodel/musicview.dart';
-
+import 'shopmodel/shopview.dart';
 final counter = CounterModel();
 
 void main() async {
@@ -47,10 +47,12 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     var routes = <String, WidgetBuilder>{
 
-      '/send1': (BuildContext context) => new MainView(title: "Main"),
+      '/main1': (BuildContext context) => new MainView(title: "Main"),
       '/Camera': (BuildContext context) => new TakePictureScreen(camera: camera,),
       '/Select': (BuildContext context) => new SelectionScreen(),
       '/musicview': (BuildContext context) => new MusicView(),
+      '/shop': (BuildContext context) => new ShopView(),
+      '/player': (BuildContext context) => new PlayerWidget(url:"assets/audios/1.wav"),
 
 
       //'/SDCard': (BuildContext context) => new SendPage(title: "DFsend"),
