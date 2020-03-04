@@ -177,7 +177,9 @@ class _LoginPageState extends State<LoginPage> {
     return new Scaffold(
       appBar: new AppBar(
         title: new Text(widget.title),
+        centerTitle: true,
       ),
+
       body:    Center(
         child: Column(
           children: <Widget>[

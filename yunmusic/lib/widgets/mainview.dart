@@ -106,6 +106,7 @@ class _MainViewState extends State<MainView> with AutomaticKeepAliveClientMixin{
       onPageChanged: (index)
       {
         pageChanged(index);
+
       },
       children: <Widget>[
         MainPage1(),

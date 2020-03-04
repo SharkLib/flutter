@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:redux/redux.dart';
 import 'storelogin.dart';
+import 'booklist.dart';
 
 //final result = await Navigator.push(
 //            context,
@@ -132,7 +133,7 @@ class ShopView extends StatelessWidget {
       ),
       home:  new StoreConnector<AppState,AppState>(builder: (BuildContext context,AppState state){
         print("isLogin:${state.auth.isLogin}");
-        return new MyHomePage(title: 'Flutter Demo Home Page',
+        return new MyHomePage(title: 'Flutter Store Demo',
             counter:state.main.counter,isLogin: state.auth.isLogin,account:state.auth.account);
       }, converter: (Store<AppState> store){
         return store.state;
@@ -153,9 +154,69 @@ class MyHomePage extends StatelessWidget {
    String account = 'aaa';
   int _currentIndex =0;
 
-  void onTabTapped(int index) {
-      _currentIndex = index;
+
+  final lt = <Widget>[
+    Text("abc"),
+    //BookList(),
+    Text("Two"),
+    Text("last"),
+  ];
+
+
+  void pageChanged(int index) {
+    _currentIndex = index;
   }
+
+  PageController pageController = PageController(
+    initialPage: 0,
+    keepPage: true,
+  );
+
+  void onTabTapped(int index) {
+    _currentIndex = index;
+    pageController.jumpToPage(index);
+    print("Curent:$_currentIndex");
+  }
+  Widget buildPageView() {
+    if (isLogin)
+    return PageView(
+      controller: pageController,
+      onPageChanged: (index)
+      {
+        pageChanged(index);
+      },
+      children:lt,
+    );
+
+    Widget loginPane =  new StoreConnector<AppState,VoidCallback>(
+        key:new ValueKey("logout"),
+        builder: (BuildContext context,VoidCallback login){
+          return new RaisedButton(onPressed:login,child: new Text("登录"),);
+        }, converter: (Store<AppState> store){
+      return ()=>
+          store.dispatch(
+            //new LoginSuccessAction(account: "Ro account!")
+              Actions.LoginSuccess
+          );
+    });
+
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: <Widget>[
+        Text(
+          'You have pushed the button this many times:',
+        ),
+        Text(
+          '$counter',
+        ),
+
+        /// 有登录，展示你好:xxx,没登录，展示登录按钮
+        loginPane,
+
+      ],
+    );
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -213,24 +274,8 @@ class MyHomePage extends StatelessWidget {
       ),
 
       body:  Center(
-        child:  Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-             Text(
-              'You have pushed the button this many times:',
-            ),
-             Text(
-              '$counter',
-              style: Theme
-                  .of(context)
-                  .textTheme
-                  .display1,
-            ),
+        child: buildPageView(),
 
-            /// 有登录，展示你好:xxx,没登录，展示登录按钮
-            loginPane
-          ],
-        ),
       ),
 
 
