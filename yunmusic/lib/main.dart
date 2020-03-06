@@ -11,6 +11,7 @@ import 'widgets/mainview.dart';
 import 'musicmodel/player.dart';
 import 'musicmodel/musicview.dart';
 import 'shopmodel/shopview.dart';
+import 'mainpage.dart';
 final counter = CounterModel();
 
 void main() async {
@@ -47,6 +48,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     var routes = <String, WidgetBuilder>{
 
+     // '/': (BuildContext context) => new MainPage(title: "DFmain"),
       '/main1': (BuildContext context) => new MainView(title: "Main"),
       '/Camera': (BuildContext context) => new TakePictureScreen(camera: camera,),
       '/Select': (BuildContext context) => new SelectionScreen(),
@@ -62,7 +64,7 @@ class MyApp extends StatelessWidget {
         theme: new ThemeData(
           primarySwatch: Colors.blue,
         ),
-        home: new LoginPage(title: 'DFsend'),
+        home: new MainPage(title: 'DFmain'),
         routes: routes,
         debugShowCheckedModeBanner: false
     );

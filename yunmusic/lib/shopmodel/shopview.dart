@@ -157,7 +157,7 @@ class MyHomePage extends StatelessWidget {
 
   final lt = <Widget>[
     Text("abc"),
-    //BookList(),
+    BookList(),
     Text("Two"),
     Text("last"),
   ];
@@ -172,12 +172,13 @@ class MyHomePage extends StatelessWidget {
     keepPage: true,
   );
 
-  void onTabTapped(int index) {
-    _currentIndex = index;
-    pageController.jumpToPage(index);
-    print("Curent:$_currentIndex");
-  }
+
+
+
   Widget buildPageView() {
+
+
+
     if (isLogin)
     return PageView(
       controller: pageController,
@@ -220,6 +221,33 @@ class MyHomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+    void onTabTapped(int index) {
+      _currentIndex = index;
+      pageController.jumpToPage(index);
+      print("Curent:$_currentIndex");
+
+    }
+
+    BottomNavigationBar bar = BottomNavigationBar(
+      onTap: onTabTapped,
+      currentIndex: _currentIndex, // new
+      items: [
+        new BottomNavigationBarItem(
+          icon: Icon(Icons.archive),
+          title: Text('Files'),
+        ),
+        new BottomNavigationBarItem(
+          icon: Icon(Icons.message),
+          title: Text('Logs'),
+        ),
+        new BottomNavigationBarItem(
+          icon: Icon(Icons.help),
+          title: Text('Help'),
+
+        )
+      ],
+    );
 
     print("build:$isLogin");
     Widget loginPane;
@@ -285,33 +313,18 @@ class MyHomePage extends StatelessWidget {
           onPressed:callback,
           tooltip: 'Increment',
           child: new Icon(Icons.add),
+
         );
 
       },
+
           converter: (Store<AppState> store){
         return ()=>store.dispatch(Actions.Increase);
       }),
 
+      //floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
 
-      bottomNavigationBar: BottomNavigationBar(
-        onTap: onTabTapped,
-        currentIndex: _currentIndex, // new
-        items: [
-          new BottomNavigationBarItem(
-            icon: Icon(Icons.archive),
-            title: Text('Files'),
-          ),
-          new BottomNavigationBarItem(
-            icon: Icon(Icons.message),
-            title: Text('Logs'),
-          ),
-          new BottomNavigationBarItem(
-            icon: Icon(Icons.help),
-            title: Text('Help'),
-
-          )
-        ],
-      ),
+      bottomNavigationBar: bar,
 
 
     );
