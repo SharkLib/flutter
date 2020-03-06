@@ -3,6 +3,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:provider/provider.dart';
 
 import 'package:fullflutter/models/shopmodel.dart';
+import 'package:google_sign_in/google_sign_in.dart';
+
 
 class LoginPage extends StatefulWidget {
   LoginPage({Key key, this.title}) : super(key: key);
@@ -21,6 +23,36 @@ class _LoginPageState extends State<LoginPage> {
   TextEditingController pwdController = new TextEditingController();
   GlobalKey formKey = new GlobalKey<FormState>();
 
+
+  GoogleSignIn _googleSignIn = GoogleSignIn(
+    scopes: [
+      'email',
+      'https://www.googleapis.com/auth/contacts.readonly',
+      "https://www.googleapis.com/auth/userinfo.profile",
+    ],
+    /*
+    * Gmail.send
+calendar
+calendar.readonly
+calendar.events.readonly
+calendar.events
+contacts.readonly
+contacts
+* */
+  );
+
+  Future<void> _handleSignIn() async {
+    try {
+      final GoogleSignInAccount googleSignInAccount = await _googleSignIn.signIn();
+      final GoogleSignInAuthentication googleSignInAuthentication =     await googleSignInAccount.authentication;
+
+      print(googleSignInAccount.email);
+      print( googleSignInAuthentication.toString());
+    } catch (error) {
+
+      print("ther is Error-------:$error");
+    }
+  }
 
 
 
@@ -107,6 +139,14 @@ class _LoginPageState extends State<LoginPage> {
                   Navigator.pop(context, 'Failed!');
                 },
               ),
+              FlatButton(
+                child: Text('Google'),
+                color: Colors.blue,
+                onPressed: () async {
+                  await _handleSignIn();
+                },
+              ),
+
             ],
                 alignment:MainAxisAlignment.center,
                 mainAxisSize:MainAxisSize.max
