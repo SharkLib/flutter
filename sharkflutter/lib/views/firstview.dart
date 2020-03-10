@@ -220,10 +220,10 @@ class _FirstPageState extends State<FirstPage> {
     var viewGroup = new ButtonBar( children: <Widget>[
       IconButton(
         icon: const Icon(Icons.camera),
-        tooltip: 'Show Camera',
+        tooltip: 'Show Firebase',
         color: Colors.blue,
         onPressed: () {
-          Navigator.pushNamed(context, '/Camera');
+          Navigator.pushNamed(context, '/firebase');
         },
       ),
       IconButton(
@@ -369,6 +369,7 @@ class _FirstPageState extends State<FirstPage> {
               progressColor: Colors.blue,
             ),
             TestBar,
+            viewGroup,
 
 
           ],

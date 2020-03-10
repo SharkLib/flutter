@@ -16,7 +16,7 @@ import 'pages/common.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:permission_handler/permission_handler.dart';
-
+import 'pages/firebase_database.dart';
 
 
 final shopModel = ShopModel();
@@ -77,8 +77,10 @@ class MyApp extends StatelessWidget {
       '/login': (BuildContext context) => new LoginPage(title:"Login"),
       '/shop': (BuildContext context) => new ShopView(),
       '/internet': (BuildContext context) => new InternetView(title:"Internet"),
-      '/fm': (BuildContext context) => new FileManager()
+      '/fm': (BuildContext context) => new FileManager(),
+      '/firebase' : (BuildContext context) => new FBDatabasePage(),
       //'/SDCard': (BuildContext context) => new SendPage(title: "DFsend"),
+
     };
     return new MaterialApp(
         title: 'Flutter Demo',
