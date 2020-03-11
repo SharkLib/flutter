@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:dio/dio.dart';
-import 'package:json_annotation/json_annotation.dart';
+
 import 'dart:convert';
 
 class GitPage extends StatefulWidget {
