@@ -16,8 +16,8 @@ import 'pages/common.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:permission_handler/permission_handler.dart';
-import 'pages/firebase_realdatabase.dart';
-import 'pages/firebase_cloudstroe.dart';
+import 'firebase/firebaseview.dart';
+
 
 
 final shopModel = ShopModel();
@@ -79,8 +79,8 @@ class MyApp extends StatelessWidget {
       '/shop': (BuildContext context) => new ShopView(),
       '/internet': (BuildContext context) => new InternetView(title:"Internet"),
       '/fm': (BuildContext context) => new FileManager(),
-      '/firebase' : (BuildContext context) => new FBDatabasePage(),
-      '/cloudDatabase' : (BuildContext context) => new CloudStorePage(),
+      '/firebase' : (BuildContext context) => new FirebaseView(title:"Firebase"),
+      //'/cloudDatabase' : (BuildContext context) => new CloudStorePage(),
       //'/SDCard': (BuildContext context) => new SendPage(title: "DFsend"),
 
     };

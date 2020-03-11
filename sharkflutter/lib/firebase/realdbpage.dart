@@ -32,6 +32,14 @@ class FBDatabasePageState extends State<FBDatabasePage>
         print(  event.snapshot.value );
       });
     });
+    databaseReference.onChildAdded.listen((event) {
+      setState(() {
+        print("OnAdded");
+        print(  event.snapshot.value );
+      });
+    });
+
+
   }
 
 
@@ -45,6 +53,7 @@ class FBDatabasePageState extends State<FBDatabasePage>
 
         builder: (BuildContext context, AsyncSnapshot<Map<dynamic, dynamic>> snapShot) {
 
+          print("future builder");
           switch (snapShot.connectionState)
           {
             case ConnectionState.none:
@@ -72,9 +81,7 @@ class FBDatabasePageState extends State<FBDatabasePage>
     );
 
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Firebase Connect'),
-      ),
+
       body: Center(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,

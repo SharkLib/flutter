@@ -159,10 +159,10 @@ class _FirstPageState extends State<FirstPage> {
             }
         ),
         ActionChip(
-            avatar: new CircleAvatar(backgroundColor: Colors.blue, child: Text('M')),
-            label: new Text('Music'),
+            avatar: new CircleAvatar(backgroundColor: Colors.blue, child: Text('FB')),
+            label: new Text('Firebase'),
             onPressed: () {
-              Navigator.pushNamed(this.context, '/musicview');
+              Navigator.pushNamed(this.context, '/firebase');
             }
         ),
         ActionChip(
