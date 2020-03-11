@@ -231,7 +231,7 @@ class _FirstPageState extends State<FirstPage> {
         tooltip: 'shop',
         color: Colors.blue,
         onPressed: () {
-          Navigator.pushNamed(context, '/shop');
+          Navigator.pushNamed(context, '/cloudDatabase');
         },
       ),
       IconButton(
