@@ -113,13 +113,8 @@ class FBDatabasePageState extends State<FBDatabasePage>
                 },
               ),
 
-        Padding(
-          padding: const EdgeInsets.all(0.0),
-          child:SizedBox(
+              Expanded(
               child: gitListView,
-            height: 200,
-              width: 200,
-          ),
 
         )
             ],

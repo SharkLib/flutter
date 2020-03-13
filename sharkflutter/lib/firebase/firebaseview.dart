@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'clouddbpage.dart';
 import 'realdbpage.dart';
 import 'realdb2page.dart';
-import 'adspage.dart';
+import 'mappage.dart';
+import 'drawpage.dart';
 
 class FirebaseView extends StatefulWidget {
   FirebaseView({Key key, this.title}) : super(key: key);
@@ -37,7 +38,8 @@ class _FirebaseViewtate extends State<FirebaseView> {
     CloudStorePage(),
     FBDatabasePage(),
     RealDB2Page(),
-    AdsPage(),
+    MapSample(),
+    DrawPage(),
   ];
 
 
@@ -120,6 +122,7 @@ class _FirebaseViewtate extends State<FirebaseView> {
         currentIndex: _currentIndex, // new
         items: [
            BottomNavigationBarItem(
+             backgroundColor: Colors.blue,
             icon: Icon(Icons.archive),
             title: Text('Cloud DB'),
           ),
@@ -134,7 +137,12 @@ class _FirebaseViewtate extends State<FirebaseView> {
           ),
            BottomNavigationBarItem(
             icon: Icon(Icons.help),
-            title: Text('Ads'),
+            title: Text('Map'),
+
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.help),
+            title: Text('ADs'),
 
           )
         ],
