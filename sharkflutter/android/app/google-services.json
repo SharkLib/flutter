@@ -13,12 +13,7 @@
           "package_name": "com.sharklib"
         }
       },
-      "oauth_client": [
-        {
-          "client_id": "534054642322-agc54jp90nijshthue6ofk863agcltuv.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
+      "oauth_client": [],
       "api_key": [
         {
           "current_key": "AIzaSyB6MjHdyABRRaKL_0ujRDs01mrKi97xlAY"
@@ -26,12 +21,7 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": [
-            {
-              "client_id": "534054642322-agc54jp90nijshthue6ofk863agcltuv.apps.googleusercontent.com",
-              "client_type": 3
-            }
-          ]
+          "other_platform_oauth_client": []
         }
       }
     },
@@ -44,8 +34,12 @@
       },
       "oauth_client": [
         {
-          "client_id": "534054642322-agc54jp90nijshthue6ofk863agcltuv.apps.googleusercontent.com",
-          "client_type": 3
+          "client_id": "534054642322-6bqlu6us25qvib28fdia8jauplck3ofo.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.sharklib.sharkflutter",
+            "certificate_hash": "9f664059991949e790388e077694197da2429e73"
+          }
         }
       ],
       "api_key": [
@@ -55,12 +49,7 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": [
-            {
-              "client_id": "534054642322-agc54jp90nijshthue6ofk863agcltuv.apps.googleusercontent.com",
-              "client_type": 3
-            }
-          ]
+          "other_platform_oauth_client": []
         }
       }
     }

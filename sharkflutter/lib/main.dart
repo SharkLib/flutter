@@ -31,6 +31,7 @@ void main() async {
     Common().sDCardDir = (await getExternalStorageDirectory()).path;
   }
 
+
   // Permission check
   Future<void> getPermission() async {
     if (Platform.isAndroid) {

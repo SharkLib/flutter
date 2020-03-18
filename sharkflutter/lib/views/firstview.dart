@@ -9,6 +9,11 @@ import 'dart:async';
 import 'package:path_provider/path_provider.dart';
 import 'package:SharkFlutter/widget/linear_percent_indicator.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
+import 'package:SharkFlutter/ms/azusepage.dart';
+import 'package:SharkFlutter/pages/locationpage.dart';
+import 'package:flutter/services.dart';
+import 'package:location/location.dart';
 //import 'package:flutter_github_api/flutter_github_api.dart';
 //import 'package:flutter_github_api/entity/index.dart';
 //User user;
@@ -56,6 +61,43 @@ class _FirstPageState extends State<FirstPage> {
   TextEditingController unameController = new TextEditingController();
   TextEditingController pwdController = new TextEditingController();
   GlobalKey formKey = new GlobalKey<FormState>();
+
+  final Location location = new Location();
+
+  LocationData _location;
+  String _error;
+
+  _getLocation() async {
+    setState(() {
+      _error = null;
+    });
+    try {
+      var _locationResult = await location.getLocation();
+      setState(() {
+        _location = _locationResult;
+        print( _location);
+      });
+
+     location.onLocationChanged().handleError((err) {
+        setState(() {
+          _error = err.code;
+        });
+      }).listen((LocationData currentLocation) {
+        setState(() {
+          _error = null;
+
+          _location = currentLocation;
+        });
+      });
+
+
+    } on PlatformException catch (err) {
+      setState(() {
+        _error = err.code;
+        print(_error);
+      });
+    }
+  }
 
   Future ListDir(pathStr) async
   {
@@ -188,9 +230,7 @@ class _FirstPageState extends State<FirstPage> {
 
     final model = Provider.of<ShopModel>(context);
     final textSize = Provider.of<int>(context).toDouble();
-
-
-
+    //_getLocation();
     var loginButton = new ButtonBar( children: <Widget>[
       FlatButton(
         child: Text( model.user == null? 'Login':"Logout"),
@@ -239,7 +279,10 @@ class _FirstPageState extends State<FirstPage> {
         tooltip: 'Show File ',
         color: Colors.blue,
         onPressed: () async{
-          File file = await FilePicker.getFile();
+          Navigator.push( context,
+              MaterialPageRoute(builder: (context) {
+                return ListenLocationWidget();
+              }));
         },
       ),
       IconButton(
@@ -248,7 +291,10 @@ class _FirstPageState extends State<FirstPage> {
         key: Key('MusicPlayer'),
         color: Colors.blue,
         onPressed: () {
-          Navigator.pushNamed(context, '/musicview');
+          Navigator.push( context,
+              MaterialPageRoute(builder: (context) {
+                return AzurePage();
+              }));
         },
       ),
     ],
@@ -370,6 +416,16 @@ class _FirstPageState extends State<FirstPage> {
             ),
             TestBar,
             viewGroup,
+            RaisedButton(
+              child: Text("Get"),
+              onPressed: _getLocation,
+            ),
+            Text(
+              'Location: ' + (_error ?? '${_location ?? "unknown"}'),
+              style: Theme.of(context).textTheme.body2,
+            ),
+
+
 
 
           ],
