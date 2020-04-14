@@ -1,0 +1,58 @@
+{
+  "project_info": {
+    "project_number": "534054642322",
+    "firebase_url": "https://powerful-bounty-269617.firebaseio.com",
+    "project_id": "powerful-bounty-269617",
+    "storage_bucket": "powerful-bounty-269617.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:534054642322:android:447d00e337fd8e375d3c4b",
+        "android_client_info": {
+          "package_name": "com.sharklib"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB6MjHdyABRRaKL_0ujRDs01mrKi97xlAY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:534054642322:android:ad46daa57eade94b5d3c4b",
+        "android_client_info": {
+          "package_name": "com.sharklib.sharkflutter"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "534054642322-6bqlu6us25qvib28fdia8jauplck3ofo.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.sharklib.sharkflutter",
+            "certificate_hash": "9f664059991949e790388e077694197da2429e73"
+          }
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB6MjHdyABRRaKL_0ujRDs01mrKi97xlAY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
