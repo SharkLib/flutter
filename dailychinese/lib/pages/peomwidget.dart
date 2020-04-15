@@ -1,29 +1,18 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:provider/provider.dart';
 import 'package:intl/date_symbol_data_local.dart';
-import 'package:path_provider/path_provider.dart';
 import 'package:intl/intl.dart' show DateFormat;
 import 'dart:io';
 import 'package:intl/intl.dart';
-import 'package:intl/intl.dart' show DateFormat;
-import 'package:intl/date_symbol_data_local.dart';
 
-import 'dart:io';
 import 'dart:async';
 import 'package:flutter_sound/flutter_sound.dart';
-import 'package:permission_handler/permission_handler.dart';
-import 'package:path/path.dart' as p;
-import 'package:shared_preferences/shared_preferences.dart';
 
-import 'package:flutter/services.dart';
 import 'package:SharkFlutter/models/shopmodel.dart';
 import 'package:flutter_tts/flutter_tts.dart';
-import 'package:flutter_sound/flutter_sound_player.dart';
-import 'package:flutter_sound/flutter_sound.dart';
-import 'package:flutter_sound/track_player.dart';
-import 'package:flutter_sound/flutter_sound_recorder.dart';
 import 'package:lunar_calendar_converter/lunar_solar_converter.dart';
 
 class PeomWidget extends StatefulWidget {
@@ -316,7 +305,7 @@ class _PeomViewState extends State<PeomWidget> with AutomaticKeepAliveClientMixi
 
           decoration: BoxDecoration(
             image: DecorationImage(
-              image: AssetImage("assets/bc.png"),
+              image: AssetImage("assets/head1.jpg"),
               fit: BoxFit.cover,
             ),
           ),
@@ -337,14 +326,66 @@ class _PeomViewState extends State<PeomWidget> with AutomaticKeepAliveClientMixi
                   ),
                 ),
                 // child:Text(formattedDate),
-                child:Text(formattedDate,
-                  textAlign: TextAlign.center,
-                  style: new TextStyle(
-                    fontStyle: FontStyle.normal,
-                    fontSize: 30.0,
-                    color: Colors.amber,
-                  ),
-                ),
+                child: Column(
+                  children: <Widget>[
+                    Text(formattedDate,
+                      textAlign: TextAlign.center,
+                      style: new TextStyle(
+                        fontStyle: FontStyle.normal,
+                        fontSize: 20.0,
+                        color: Colors.amber,
+                      ),
+                    ),
+                    Container(
+                      //padding: const EdgeInsets.all(6.0),
+                      width: (MediaQuery.of(context).size.width)-200,
+                      alignment:Alignment.bottomRight,
+
+                      child:Row(
+
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: <Widget>[
+                        Text(now.day.toString(),
+                          textAlign: TextAlign.center,
+                          style: new TextStyle(
+                            fontStyle: FontStyle.normal,
+                            fontSize: 40.0,
+                            color: Colors.deepOrange,
+                          ),
+                        ),
+                        Text( " ",
+                          textAlign: TextAlign.center,
+                          style: new TextStyle(
+                            fontStyle: FontStyle.normal,
+                            fontSize: 25.0,
+                            color: Colors.deepOrange,
+                          ),
+                        ),
+                        Text(DateFormat('EEEE').format(now),
+                          textAlign: TextAlign.center,
+                          style: new TextStyle(
+                            fontStyle: FontStyle.normal,
+                            fontSize: 20.0,
+                            color: Colors.deepOrange,
+                          ),
+                        ),
+                      ],
+                    ),
+                    ),
+
+                    Text(DateFormat("yyyy-MM").format(now),
+                      textAlign: TextAlign.left,
+                      style: new TextStyle(
+                        fontStyle: FontStyle.normal,
+                        fontSize: 20.0,
+                        color: Colors.deepPurpleAccent,
+                      ),
+                    )
+
+                  ],
+                )
+
+               ,
 
 
               ),
@@ -371,39 +412,20 @@ class _PeomViewState extends State<PeomWidget> with AutomaticKeepAliveClientMixi
                 ),
 
               ),
-/*
-                  Container(
 
-                    width:  (MediaQuery.of(context).size.width)-100,
-
-                    decoration: BoxDecoration(
-                      image: DecorationImage(
-                        image: AssetImage("assets/timg.jpeg"),
-                        fit: BoxFit.cover,
-                      ),
-                    ),
-                    child:Text(
-                      "这首诗写的是",
-                      style: TextStyle(
-                        fontSize: 20.0,
-                        color: Colors.red,
-                      ),
-                    ),
-
-                  ),
-*/
             ],
           ),
         ),
         floatingActionButton: Container(
-            height: 180,
-
+            height: 40,
+            width: 180,
+            alignment:Alignment.bottomRight,
             child: Padding(
 
-              padding: const EdgeInsets.all(2.0),
+              padding: const EdgeInsets.all(6.0),
 
-              child: Column(
-
+              child: Row(
+                crossAxisAlignment:CrossAxisAlignment.end,
                 //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
                   FloatingActionButton(

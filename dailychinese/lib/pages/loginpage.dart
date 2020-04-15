@@ -20,7 +20,6 @@ class LoginPage extends StatefulWidget {
 
 class _LoginPageState extends State<LoginPage> {
 
-
   TextEditingController unameController = new TextEditingController();
   TextEditingController pwdController = new TextEditingController();
   GlobalKey formKey = new GlobalKey<FormState>();
@@ -43,8 +42,8 @@ contacts
 * */
   );
 
-  Future<String> _handleSignIn() async {
-    //final model = Provider.of<ShopModel>(context);
+  Future<GoogleSignInAccount> _handleSignIn() async {
+
     try {
       print("1");
       final GoogleSignInAccount googleSignInAccount = await _googleSignIn.signIn();
@@ -56,7 +55,8 @@ contacts
       //model.login(googleSignInAccount.email);
       //print( googleSignInAuthentication.toString());
       //Navigator.pop(context, 'Sueccess!');
-      return googleSignInAccount.email;
+     // model.login( googleSignInAccount.displayName,googleSignInAccount.email,googleSignInAccount.photoUrl);
+      return googleSignInAccount;
     } catch (error) {
 
       print("ther is Error-------:$error");
@@ -106,7 +106,7 @@ contacts
                         //LoginClickedAction(username: "rong", password: "rong");
                         // signInWithEmailAndPassword("huang",'g');
                         //验证通过提交数据
-                        model.login(unameController.text);
+                       // model.login(unameController.text);
                         model.addProduct("CD", 1.22);
                         Navigator.pop(context, 'Sueccess!');
                       }
@@ -196,7 +196,7 @@ contacts
                     //LoginClickedAction(username: "rong", password: "rong");
                     // signInWithEmailAndPassword("huang",'g');
                     //验证通过提交数据
-                    model.login(unameController.text);
+                   // model.login(unameController.text);
                     model.addProduct("CD", 1.22);
                     Navigator.pop(context, 'Sueccess!');
                   }
@@ -214,7 +214,7 @@ contacts
                 color: Colors.blue,
                 onPressed: () async {
                   var u = await _handleSignIn();
-                  model.login(u);
+                  model.login(u.displayName,u.email,u.photoUrl);
                   //model.addProduct("CD", 1.22);
                   Navigator.pop(context, 'Sueccess!');
                 },

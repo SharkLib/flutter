@@ -25,12 +25,28 @@ class ShopModel with ChangeNotifier
   int get totalLogin => _totalLogin;
   String _user;
   String get user => _user;
+  String _email;
+  String get Email => _email;
+  String _imgUrl;
+  String get Img => _imgUrl;
+
+  ImageProvider _UserImg = AssetImage("assets/head1.jpg");
+  ImageProvider get UserImg => _UserImg;
 
 
-  void login(user)
+  void login(user,email,img)
   {
     _totalLogin++;
     _user = user;
+    _email = email;
+    _imgUrl = img;
+
+    _UserImg =  Image.network(
+        _imgUrl,
+        height: 100,
+        width: 150
+    ).image;
+
     notifyListeners();
   }
 

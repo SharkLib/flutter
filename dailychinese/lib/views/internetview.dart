@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:SharkFlutter/pages/aboutpage.dart';
 import 'package:SharkFlutter/pages/peomwidget.dart';
 import 'package:SharkFlutter/pages/gitpage.dart';
 import 'package:SharkFlutter/models/shopmodel.dart';
 import 'package:SharkFlutter/pages/record.dart';
+import 'package:SharkFlutter/firebase/clouddbpage.dart';
 
 class InternetView extends StatefulWidget {
   InternetView({Key key, this.title}) : super(key: key);
@@ -39,14 +39,14 @@ class _InternetViewState extends State<InternetView> with AutomaticKeepAliveClie
 
   String title = "诗词";
 
+  ImageProvider img = AssetImage("assets/head1.jpg");
+
 
 
 
   @override
   bool get wantKeepAlive => true;
 
-
-  static final CREATE_POST_URL = 'https://dfws52.datafax.com:4433/dfws/v5/authorize';
 
   @override
   void initState() {
@@ -100,9 +100,10 @@ class _InternetViewState extends State<InternetView> with AutomaticKeepAliveClie
 
       },
       children: <Widget>[
-        GitPage(),
         PeomWidget(),
-        RecorderPage( ),
+        GitPage(),
+        //RecorderPage( ),
+        CloudStorePage(),
       ],
     );
   }
@@ -111,6 +112,7 @@ class _InternetViewState extends State<InternetView> with AutomaticKeepAliveClie
   Widget build(BuildContext context) {
 
     final model = Provider.of<ShopModel>(context);
+    String uu = model.user==null?"No":model.user;
     // This method is rerun every time setState is called, for instance as done
     // by the _incrementCounter method above.
     //
@@ -123,7 +125,19 @@ class _InternetViewState extends State<InternetView> with AutomaticKeepAliveClie
         appBar: AppBar(
           // Here we take the value from the MyHomePage object that was created by
           // the App.build method, and use it to set our appbar title.
+          leading: Builder(
+            builder: (BuildContext context) {
+              return IconButton(
+                icon: const Icon(Icons.menu),
+                onPressed: () { Scaffold.of(context).openDrawer(); },
+                tooltip: MaterialLocalizations.of(context).openAppDrawerTooltip,
+              );
+            },
+          ),
+
           title: Text(title),
+          backgroundColor: Colors.blueGrey,
+
           actions: <Widget>[
             IconButton(
               icon: const Icon(Icons.account_box),
@@ -143,6 +157,69 @@ class _InternetViewState extends State<InternetView> with AutomaticKeepAliveClie
         index: _currentIndex,
         children: _children,
       ),*/
+
+        drawer: Container(
+
+            width: 180,
+          // Add a ListView to the drawer. This ensures the user can scroll
+          // through the options in the drawer if there isn't enough vertical
+          // space to fit everything.
+          child:Drawer(
+
+            child: ListView(
+
+              // Important: Remove any padding from the ListView.
+              padding: EdgeInsets.zero,
+              children: <Widget>[
+                DrawerHeader(
+                  /* decoration: BoxDecoration(
+
+                  image: DecorationImage
+                    (
+                  image:  model.UserImg,
+                  fit: BoxFit.cover
+                  ),
+                borderRadius: new BorderRadius.all(new Radius.circular(150.0)),
+               ),*/
+                  child:  new Container(
+                    width: 100.0,
+                    height: 100.0,
+                    decoration: new BoxDecoration(
+                      color: const Color(0xff7c94b6),
+                      image: new DecorationImage(
+                        image:  model.UserImg,
+                        fit: BoxFit.cover,
+                      ),
+                      borderRadius: new BorderRadius.all(new Radius.circular(300.0)),
+                      border: new Border.all(
+                        color: Colors.red,
+                        width: 4.0,
+                      ),
+                    ),
+                  ),
+                ),
+                ListTile(
+                  title: Text('Item 1'),
+                  onTap: () {
+                    // Update the state of the app
+                    // ...
+                    // Then close the drawer
+                    Navigator.pop(context);
+                  },
+                ),
+                ListTile(
+                  title: Text('Item 2'),
+                  onTap: () {
+                    // Update the state of the app
+                    // ...
+                    // Then close the drawer
+                    Navigator.pop(context);
+                  },
+                ),
+              ],
+            ),
+          )
+        ),
 
 
         bottomNavigationBar: BottomNavigationBar(
