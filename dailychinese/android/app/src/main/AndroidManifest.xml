@@ -53,6 +53,7 @@
             android:value="ca-app-pub-1962140952663321	"/>
 
 
+
     </application>
 
     <uses-permission android:name="android.permission.RECORD_AUDIO" />

@@ -174,7 +174,6 @@ class SelectionScreen extends StatelessWidget {
 
   // Permission check
   Future<void> getPermission() async {
-
     // obtain shared preferences
     final prefs = await SharedPreferences.getInstance();
     // Try reading data from the counter key. If it doesn't exist, return 0.
@@ -185,98 +184,85 @@ class SelectionScreen extends StatelessWidget {
     prefs.setInt('counter', 5);
 
     if (Platform.isAndroid) {
-      PermissionStatus permission = await PermissionHandler().checkPermissionStatus(PermissionGroup.storage);
-      if (permission != PermissionStatus.granted) {
-        await PermissionHandler().requestPermissions([PermissionGroup.storage]);
-      }
-      sdPath= (await getExternalStorageDirectory()).path;
-    } else if (Platform.isIOS) {
-      sdPath = (await getExternalStorageDirectory()).path;
+
+    }
+
+    @override
+    Widget build(BuildContext context) {
+      return Scaffold(
+        appBar: AppBar(
+          title: Text('Pick an option'),
+        ),
+        body: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: RaisedButton(
+                  onPressed: () {
+                    // Close the screen and return "Yep!" as the result.
+                    Navigator.pop(context, 'Yep!');
+                  },
+                  child: Text('Yep!'),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: RaisedButton(
+                  onPressed: () async {
+                    await getPermission();
+                    print("get sdCard path" + sdPath);
+                    // final directory = await getApplicationDocumentsDirectory();
+                    // For your reference print the AppDoc directory
+                    //  print("DocumentsDirectory:" +  directory.path);
+                    // final a1 = await getDownloadsDirectory();
+                    //  print("Download:" + a1.path);
+                    final a2 = await getExternalStorageDirectory();
+                    print("External storage:" + a2.path);
+                    final a3 = await getExternalStorageDirectory();
+                    Directory extDir = Directory("/sdcard");
+
+                    for (var v in a3.listSync()) {
+                      // 去除以 .开头的文件/文件夹
+                      if (p.basename(v.path).substring(0, 1) == '.') {
+                        continue;
+                      }
+                      if (FileSystemEntity.isFileSync(v.path))
+                        print(v.path);
+                      else
+                        print(v.path);
+                    }
+
+                    // Close the screen and return "Nope!" as the result.
+                    //Navigator.pop(context, 'Nope.');
+                  },
+                  child: Text('Nope.'),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: RaisedButton(
+                  onPressed: () {
+                    // Close the screen and return "Yep!" as the result.
+
+                  },
+                  child: Text('Add+1!'),
+                ),
+              ),
+
+            ],
+          ),
+        ),
+      );
     }
   }
 
   @override
   Widget build(BuildContext context) {
-
-
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Pick an option'),
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: RaisedButton(
-                onPressed: () {
-                  // Close the screen and return "Yep!" as the result.
-                  Navigator.pop(context, 'Yep!');
-                },
-                child: Text('Yep!'),
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: RaisedButton(
-                onPressed: () async  {
-
-
-                  await getPermission();
-                  print("get sdCard path" + sdPath);
-                   // final directory = await getApplicationDocumentsDirectory();
-                    // For your reference print the AppDoc directory
-                  //  print("DocumentsDirectory:" +  directory.path);
-                   // final a1 = await getDownloadsDirectory();
-                  //  print("Download:" + a1.path);
-                    final a2 = await getExternalStorageDirectory();
-                    print( "External storage:"+ a2.path );
-                    final a3 =await getExternalStorageDirectory();
-                    Directory extDir = Directory("/sdcard");
-
-                  for (var v in a3.listSync()) {
-                    // 去除以 .开头的文件/文件夹
-                    if (p.basename(v.path).substring(0, 1) == '.') {
-                      continue;
-                    }
-                    if (FileSystemEntity.isFileSync(v.path))
-                      print(v.path);
-                    else
-                      print(v.path);
-                  }
-
-                  // Close the screen and return "Nope!" as the result.
-                  //Navigator.pop(context, 'Nope.');
-                },
-                child: Text('Nope.'),
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: RaisedButton(
-                onPressed: () {
-                  // Close the screen and return "Yep!" as the result.
-
-                },
-                child: Text('Add+1!'),
-              ),
-            ),
-
-          ],
-        ),
-      ),
-    );
+    // TODO: implement build
+    throw UnimplementedError();
   }
-}
 
 
-class Wechat {
-  static const MethodChannel _channel =
-  const MethodChannel('wechat');
-
-  static Future<String> get platformVersion async {
-    final String version = await _channel.invokeMethod('getPlatformVersion');
-    return version;
-  }
 }

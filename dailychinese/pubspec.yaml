@@ -63,7 +63,9 @@ dependencies:
   flutter_sound: ^3.1.7
   permission_handler: ^5.0.0
   lunar_calendar_converter: ^1.0.4+1
+  #firebase_admob: ^0.9.3+1
   #flutter_tts_improved 1.0.3
+  device_info: ^0.4.2+1
 
 
 
@@ -105,6 +107,7 @@ flutter:
     - voice_volume_5.png
     - voice_volume_6.png
     - voice_volume_7.png
+    - peom.txt
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

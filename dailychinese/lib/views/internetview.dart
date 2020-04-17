@@ -5,6 +5,7 @@ import 'package:SharkFlutter/pages/gitpage.dart';
 import 'package:SharkFlutter/models/shopmodel.dart';
 import 'package:SharkFlutter/pages/record.dart';
 import 'package:SharkFlutter/firebase/clouddbpage.dart';
+import 'package:SharkFlutter/pages/devicepage.dart';
 
 class InternetView extends StatefulWidget {
   InternetView({Key key, this.title}) : super(key: key);
@@ -103,7 +104,9 @@ class _InternetViewState extends State<InternetView> with AutomaticKeepAliveClie
         PeomWidget(),
         GitPage(),
         //RecorderPage( ),
-        CloudStorePage(),
+
+        DevicePage(),
+        //CloudStorePage(),
       ],
     );
   }
