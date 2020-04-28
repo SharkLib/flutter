@@ -1,5 +1,5 @@
 name: SharkFlutter
-description: My Flutter Tutor.
+description: Lear chenise by days.
 
 # The following defines the version and build number for your application.
 # A version number is three numbers separated by dots, like 1.2.43
@@ -108,6 +108,7 @@ flutter:
     - voice_volume_6.png
     - voice_volume_7.png
     - peom.txt
+    - a1.json
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

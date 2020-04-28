@@ -1,5 +1,6 @@
 
 import 'package:flutter/cupertino.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class MusicItem
 {
@@ -21,6 +22,25 @@ class ProductItem{
 
 class ShopModel with ChangeNotifier
 {
+  ShopModel()
+  {
+    init();
+  }
+  void init() async
+  {
+    final prefs = await SharedPreferences.getInstance();
+    // Try reading data from the counter key. If it doesn't exist, return 0.
+    final counter = prefs.getInt('counter') ?? -1;
+    print("def value:" + counter.toString());
+    if (counter==-1)
+      {
+        prefs.setInt('counter', 0);
+      }
+    else
+      prefs.setInt('counter', counter+1);
+    _totalLogin = counter+1;
+  }
+
   int _totalLogin = 0;
   int get totalLogin => _totalLogin;
   String _user;

@@ -11,7 +11,7 @@ import 'package:path/path.dart' as p;
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'package:flutter/services.dart';
-import 'package:SharkFlutter/models/shopmodel.dart';
+import 'package:SharkChinese/models/shopmodel.dart';
 import 'package:flutter_tts/flutter_tts.dart';
 
 class AccountWidget extends StatelessWidget {

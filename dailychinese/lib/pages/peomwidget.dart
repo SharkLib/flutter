@@ -14,6 +14,10 @@ import 'package:flutter_sound/flutter_sound.dart';
 import 'package:SharkFlutter/models/shopmodel.dart';
 import 'package:flutter_tts/flutter_tts.dart';
 import 'package:lunar_calendar_converter/lunar_solar_converter.dart';
+import 'package:json_annotation/json_annotation.dart';
+import 'dart:convert';
+
+import 'package:flutter/foundation.dart';
 
 class PeomWidget extends StatefulWidget {
 
@@ -61,8 +65,35 @@ class _PeomViewState extends State<PeomWidget> with AutomaticKeepAliveClientMixi
 
   Icon rec = Icon(Icons.mic);
   Icon ply = Icon(Icons.play_circle_filled);
+  String title = "";
+  String peom = "";
+  String author = "";
+  String desc ="";
+  String extension1 ="";
+  String extension2 ="";
+
+  String alertTitle;
+  String alertContent;
 
 
+  Future<dynamic> loadAsset({BuildContext context}) async {
+
+    String str =  await DefaultAssetBundle.of(context).loadString('assets/a1.json');
+    Map<String, dynamic> user = jsonDecode(str);
+    print("3");
+    print(user['title']);
+    print(user['poem']);
+
+    print("-------");
+    title = user['title'];
+    peom = user['poem'];
+    author = user["author"];
+    desc = user["description"];
+    extension1 = user["extension1"];
+    extension2 = user["extension2"];
+    return json.decode(str);
+
+  }
 
   void startRecorder() async {
     try {
@@ -262,6 +293,10 @@ class _PeomViewState extends State<PeomWidget> with AutomaticKeepAliveClientMixi
   void initState() {
     super.initState();
     initTts();
+    print("1");
+    //loadAsset(context);
+
+    print("2");
 
     flutterSound = new FlutterSound();
     flutterSound.setSubscriptionDuration(0.01);
@@ -277,11 +312,80 @@ class _PeomViewState extends State<PeomWidget> with AutomaticKeepAliveClientMixi
   }
 
 
+  void _showDialog() {
+    // flutter defined function
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        // return object of type Dialog
+        return AlertDialog(
+          title:  Text(alertTitle),
+          content:  SingleChildScrollView(
+            child:  Text((alertContent),
+          ),
+          ),
+          actions: <Widget>[
+            // usually buttons at the bottom of the dialog
+            new FlatButton(
+              child: new Text("Close"),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+
   @override
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
     final model = Provider.of<ShopModel>(context);
     final textSize = Provider.of<int>(context).toDouble();
+
+    var peomW = FutureBuilder(
+      future: loadAsset(context: context),
+      builder: (BuildContext context, AsyncSnapshot<dynamic> jsonData) {
+        if (jsonData.hasData) {
+         return  Column(
+
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: <Widget>[
+              Text(title,
+                textAlign: TextAlign.center,
+                style: new TextStyle(
+                  fontStyle: FontStyle.normal,
+                  fontSize: 28.0,
+                  color: Colors.deepOrange,
+                ),
+              ),
+              Text( " ",
+                textAlign: TextAlign.center,
+                style: new TextStyle(
+                  fontStyle: FontStyle.normal,
+                  fontSize: 5.0,
+                  color: Colors.deepOrange,
+                ),
+              ),
+              Text(peom,
+                textAlign: TextAlign.center,
+                style: new TextStyle(
+                  fontStyle: FontStyle.normal,
+                  fontSize: 20.0,
+                  color: Colors.deepOrange,
+                ),
+              ),
+
+            ],
+          );
+        }
+       else
+         return Text('no loaded'); // here you want to process your data
+      },
+    );
+
 
     var now = new DateTime.now();
     Solar solar = Solar(solarYear: now.year, solarMonth: now.month, solarDay: now.day);
@@ -315,7 +419,7 @@ class _PeomViewState extends State<PeomWidget> with AutomaticKeepAliveClientMixi
             // mainAxisAlignment: MainAxisAlignment.center,
             //crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-
+              //calendar
               Container(
                 width:  (MediaQuery.of(context).size.width)-50,
                 height: (MediaQuery.of(context).size.height) / 5,
@@ -390,53 +494,63 @@ class _PeomViewState extends State<PeomWidget> with AutomaticKeepAliveClientMixi
 
               ),
 
+              //Peom
               Container(
                 width:  (MediaQuery.of(context).size.width)-50,
-                height: (MediaQuery.of(context).size.height) / 3,
+               // height: (MediaQuery.of(context).size.height) / 3,
                 decoration: BoxDecoration(
                   image: DecorationImage(
                     image: AssetImage("assets/head4.jpeg"),
                     fit: BoxFit.cover,
                   ),
                 ),
-                child:Text(
-                  "【临洛水】李世民\n "
-                      "春搜驰骏骨，总辔俯长河。\n霞处流萦锦，风前漾卷罗。"
-                      "\n水花翻照树，堤兰倒插波。\n岂必汾阴曲，秋云发棹歌。",
-                  style: TextStyle(
-                    fontSize: 20.0,
-                    color: Colors.red,
-
-                  ),
-                  textAlign: TextAlign.center,
-                ),
+                child: peomW,
 
               ),
+
+
 
             ],
           ),
         ),
         floatingActionButton: Container(
             height: 40,
-            width: 180,
+           // width: 180,
             alignment:Alignment.bottomRight,
             child: Padding(
 
-              padding: const EdgeInsets.all(6.0),
+              padding: const EdgeInsets.all(8.0),
+
 
               child: Row(
                 crossAxisAlignment:CrossAxisAlignment.end,
-                //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                //mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
+
                   FloatingActionButton(
-                    heroTag: "btnTTS",
+                    heroTag: "btnTTS1",
                     onPressed: () {
-                      _newVoiceText = "【临洛水】李世民\n "
-                          "春搜, 驰, 骏骨，总辔, 俯, 长河。\n霞处, 流, 萦锦，风前, 漾, 卷罗。"
-                          "\n水花, 翻, 照树，堤兰, 倒, 插波。\n岂必, 汾, 阴曲，秋云, 发, 棹歌。"
-                          "春搜驰骏骨，总辔俯长河。\n霞处流萦锦，风前漾卷罗。"
-                          "\n水花翻照树，堤兰倒插波。\n岂必汾阴曲，秋云发棹歌。";
-                      _speak();
+                      alertTitle = title;
+                      alertContent = desc;
+                      _showDialog();
+                    },
+                    child: Icon(Icons.title),
+                  ),
+                  FloatingActionButton(
+                    heroTag: "btnTTS2",
+                    onPressed: () {
+                      alertTitle = title;
+                      alertContent = extension1;
+                      _showDialog();
+                    },
+                    child: Icon(Icons.email),
+                  ),
+                  FloatingActionButton(
+                    heroTag: "btnTTS3",
+                    onPressed: () {
+                      alertTitle = title;
+                      alertContent = extension2;
+                      _showDialog();
                     },
                     child: Icon(Icons.audiotrack),
                   ),
@@ -458,7 +572,16 @@ class _PeomViewState extends State<PeomWidget> with AutomaticKeepAliveClientMixi
                           startPlayer();
                     },
                     child:ply,
+                  ),
+                  FloatingActionButton(
+                    heroTag: "btnNext",
+                    onPressed: () {
+                      _newVoiceText = peom;
+                      _speak();
+                    },
+                    child: Icon(Icons.skip_next),
                   )
+
                 ],
               ),
             )

@@ -1,18 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:camera/camera.dart';
-
 import 'models/shopmodel.dart';
 import 'dart:io';
-
-
 import 'pages/loginpage.dart';
 import 'views/internetview.dart';
-
-import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'firebase/firebaseview.dart';
-
+import 'package:shared_preferences/shared_preferences.dart';
 
 
 final shopModel = ShopModel();
@@ -21,6 +16,11 @@ void main() async {
   // Ensure that plugin services are initialized so that `availableCameras()`
   // can be called before `runApp()`
   WidgetsFlutterBinding.ensureInitialized();
+
+  final prefs = await SharedPreferences.getInstance();
+  // Try reading data from the counter key. If it doesn't exist, return 0.
+  final counter = prefs.getInt('counter') ?? -1;
+  print("def value:" + counter.toString());
 
 
   // Permission check

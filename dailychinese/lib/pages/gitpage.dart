@@ -49,23 +49,7 @@ class _GitPageState extends State<GitPage> with AutomaticKeepAliveClientMixin {
          // entries.add(element['name']);
         });
       });
-
       return responseJson;
-
-      /*
-      print(response.toString().length);
-      Map<String, dynamic> user =response.extra;
-      //Map<String, String> user =  jsonDecode(response.toString());
-      var decoded = codec.decode(response.data.toString());
-      print("Decoded 1: $decoded");
-      //print(response.toString());
-
-      //print(user);
-      print(user.length);
-      user.forEach((key, value) {
-        print("Each:"  + value.toJson());
-      });*/
-
     } catch (e) {
       print(e);
     }
