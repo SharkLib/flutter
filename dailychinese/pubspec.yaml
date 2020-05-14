@@ -31,7 +31,7 @@ dependencies:
   dio: ^3.0.9
   json_annotation: ^3.0.1
   #music_player: ^0.1.4
-  assets_audio_player: ^1.2.3
+
   audioplayers: ^0.14.0
   #flutter_github_api: ^0.2.1+2
 
@@ -66,6 +66,7 @@ dependencies:
   #firebase_admob: ^0.9.3+1
   #flutter_tts_improved 1.0.3
   device_info: ^0.4.2+1
+  assets_audio_player: ^1.4.0+1
 
 
 
@@ -100,6 +101,7 @@ flutter:
     - head3.jpeg
     - head4.jpeg
     - head5.jpg
+    - head7.jpg
     - voice_volume_1.png
     - voice_volume_2.png
     - voice_volume_3.png
@@ -109,6 +111,12 @@ flutter:
     - voice_volume_7.png
     - peom.txt
     - a1.json
+    - a2.json
+    - assets/ci_json/
+    - assets/shi_json/
+    - assets/mp3/
+    - assets/mp3/123.mp3
+    - yanyu.txt
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

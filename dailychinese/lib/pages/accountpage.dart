@@ -6,13 +6,10 @@ import 'package:provider/provider.dart';
 import 'package:path_provider/path_provider.dart';
 import 'dart:io';
 import 'package:intl/intl.dart';
-import 'package:permission_handler/permission_handler.dart';
 import 'package:path/path.dart' as p;
 import 'package:shared_preferences/shared_preferences.dart';
 
-import 'package:flutter/services.dart';
-import 'package:SharkChinese/models/shopmodel.dart';
-import 'package:flutter_tts/flutter_tts.dart';
+import 'package:SharkFlutter/models/shopmodel.dart';
 
 class AccountWidget extends StatelessWidget {
 

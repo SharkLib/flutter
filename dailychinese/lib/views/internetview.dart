@@ -3,47 +3,28 @@ import 'package:provider/provider.dart';
 import 'package:SharkFlutter/pages/peomwidget.dart';
 import 'package:SharkFlutter/pages/gitpage.dart';
 import 'package:SharkFlutter/models/shopmodel.dart';
+import 'package:SharkFlutter/pages/ciwidget.dart';
 import 'package:SharkFlutter/pages/record.dart';
-import 'package:SharkFlutter/firebase/clouddbpage.dart';
-import 'package:SharkFlutter/pages/devicepage.dart';
+import 'package:SharkFlutter/pages/yanyuwidget.dart';
+import 'package:SharkFlutter/pages/mp3widget.dart';
 
 class InternetView extends StatefulWidget {
   InternetView({Key key, this.title}) : super(key: key);
-
-  // This widget is the home page of your application. It is stateful, meaning
-  // that it has a State object (defined below) that contains fields that affect
-  // how it looks.
-
-  // This class is the configuration for the state. It holds the values (in this
-  // case the title) provided by the parent (in this case the App widget) and
-  // used by the build method of the State. Fields in a Widget subclass are
-  // always marked "final".
-
   final String title;
-
-
   @override
   _InternetViewState createState() => _InternetViewState();
 }
 
 class _InternetViewState extends State<InternetView> with AutomaticKeepAliveClientMixin{
-  int _counter = 0;
+
   int _currentIndex =0;
   bool visibilityTag = false;
-  int _wIndex= 0;
 
-  var curPage;
+  final List<String> entries = <String>["唐诗","宋词","谚语","精读","其他"];
 
-  final txt11 = TextEditingController();
-  final List<int> colorCodes = <int>[10, 20, 30];
-  final List<String> entries = <String>["诗词","谚语","精读"];
-
-  String title = "诗词";
+  String title = "唐诗";
 
   ImageProvider img = AssetImage("assets/head1.jpg");
-
-
-
 
   @override
   bool get wantKeepAlive => true;
@@ -57,26 +38,8 @@ class _InternetViewState extends State<InternetView> with AutomaticKeepAliveClie
   void onTabTapped(int index) {
     setState(() {
       _currentIndex = index;
-      _wIndex = index;
       title = entries[index];
-
       pageController.animateToPage(index, duration: Duration(milliseconds: 500), curve: Curves.ease);
-
-
-    });
-  }
-
-  void _incrementCounter() {
-    setState(() {
-      // This call to setState tells the Flutter framework that something has
-      // changed in this State, which causes it to rerun the build method below
-      // so that the display can reflect the updated values. If we changed
-      // _counter without calling setState(), then the build method would not be
-      // called again, and so nothing would appear to happen.
-      //if (_currentIndex >2)
-
-      _wIndex = 3;
-
     });
   }
 
@@ -102,11 +65,12 @@ class _InternetViewState extends State<InternetView> with AutomaticKeepAliveClie
       },
       children: <Widget>[
         PeomWidget(),
-        GitPage(),
-        //RecorderPage( ),
+        CiWidget(),
+        YanyuWidget(),
 
-        DevicePage(),
-        //CloudStorePage(),
+      //  Mp3Player(),
+      //  RecorderPage( ),
+
       ],
     );
   }
@@ -116,12 +80,7 @@ class _InternetViewState extends State<InternetView> with AutomaticKeepAliveClie
 
     final model = Provider.of<ShopModel>(context);
     String uu = model.user==null?"No":model.user;
-    // This method is rerun every time setState is called, for instance as done
-    // by the _incrementCounter method above.
-    //
-    // The Flutter framework has been optimized to make rerunning build methods
-    // fast, so that you can just rebuild anything that needs updating rather
-    // than having to individually change instances of widgets.
+
 //willpopscope to skip back key
     return
       Scaffold(
@@ -156,10 +115,6 @@ class _InternetViewState extends State<InternetView> with AutomaticKeepAliveClie
 
 
         body: buildPageView(),
-        /* body: IndexedStack(
-        index: _currentIndex,
-        children: _children,
-      ),*/
 
         drawer: Container(
 
@@ -227,21 +182,42 @@ class _InternetViewState extends State<InternetView> with AutomaticKeepAliveClie
 
         bottomNavigationBar: BottomNavigationBar(
           onTap: onTabTapped,
+          //backgroundColor: Colors.red,
+          showUnselectedLabels:true,
           currentIndex: _currentIndex, // new
           items: [
+
             new BottomNavigationBarItem(
               icon: Icon(Icons.archive),
-              title: Text('诗词'),
+              backgroundColor: Colors.blue,
+              title: Text('唐诗'),
             ),
+
+
             new BottomNavigationBarItem(
-              icon: Icon(Icons.message),
+              icon: Icon(Icons.archive),
+              backgroundColor: Colors.blue,
+              title: Text('宋词'),
+            ),
+
+            new BottomNavigationBarItem(
+              icon: Icon(Icons.audiotrack),
+              backgroundColor: Colors.blue,
+
               title: Text('谚语'),
             ),
-            new BottomNavigationBarItem(
-              icon: Icon(Icons.show_chart),
-              title: Text('精读'),
+           /* new BottomNavigationBarItem(
+              icon: Icon(Icons.audiotrack),
+              backgroundColor: Colors.blue,
 
-            )
+              title: Text('精读'),
+            ),
+            new BottomNavigationBarItem(
+              icon: Icon(Icons.audiotrack),
+              backgroundColor: Colors.blue,
+
+              title: Text('其他'),
+            ),*/
           ],
         ),
 
